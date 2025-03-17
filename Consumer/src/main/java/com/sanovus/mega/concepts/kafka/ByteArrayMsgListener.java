@@ -25,7 +25,7 @@ public class ByteArrayMsgListener {
         System.out.println("byte[] class:"+object.getClass().getName());
         IMessageHandler messageHandler=  messageFactory.getMessageHandler(object.getClass().getName());
         System.out.println("final msgHandler:"+messageHandler);
-        //messageHandler.handle(object);
+        messageHandler.handle(object);
         System.out.println("END");
 
     }

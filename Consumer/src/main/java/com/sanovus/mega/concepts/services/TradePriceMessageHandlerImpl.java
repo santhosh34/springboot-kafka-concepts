@@ -22,6 +22,7 @@ public class TradePriceMessageHandlerImpl implements IMessageHandler {
     @Override
     public void handle(Object dtoObject) {
         TradePriceDTO tradePriceDTO = (TradePriceDTO) dtoObject;
+        System.out.println("===>"+tradePriceDTO.getTrader());
         System.out.println("handling TradePriceMessageHandlerImpl:" + tradePriceDTO);
 
     }
