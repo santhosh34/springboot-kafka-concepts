@@ -1,47 +1,31 @@
 package com.sanovus.mega.concepts.kafka;
 
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sanovus.mega.concepts.dto.OrderPrice;
-import com.sanovus.mega.concepts.dto.TradePrice;
+import com.sanovus.mega.concepts.services.IMessageHandler;
+import com.sanovus.mega.concepts.services.MessageFactory;
 import org.apache.commons.lang3.SerializationUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.converter.ByteArrayJsonMessageConverter;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-
-import javax.swing.text.html.parser.Parser;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
 
 @Component
 @KafkaListener(id = "2", topics = {"my-byte-array-topic"})
 public class ByteArrayMsgListener {
 
-//    private static final ObjectMapper objectMapper = new ObjectMapper();
-//
-//    @KafkaHandler()
-//    public void tradePrice(@Payload TradePrice tradePrice ) {
-//        System.out.println(tradePrice);
-//        System.out.println("objectString987");
-//    }
-//
-//    @KafkaHandler()
-//    public void orderPrice(@Payload OrderPrice orderPrice ) {
-//        System.out.println(orderPrice);
-//        System.out.println("orderPrice");
-//    }
+    @Autowired
+    private MessageFactory messageFactory;
 
     @KafkaHandler(isDefault = true)
     public void getBytes(@Payload byte[] data ) {
 
         Object object = SerializationUtils.deserialize(data);
-        System.out.println(object.getClass().getName());
+
+        System.out.println("BEGIN");
+        System.out.println(object.getClass());
+        IMessageHandler messageHandler=  messageFactory.getMessageHandler(object);
+        messageHandler.handle(object);
+        System.out.println("END");
 
     }
 }
