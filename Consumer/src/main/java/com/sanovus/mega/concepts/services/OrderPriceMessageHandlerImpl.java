@@ -8,8 +8,13 @@ public class OrderPriceMessageHandlerImpl implements IMessageHandler {
 
 
     @Override
-    public boolean canHandle(Class<?> dtoObjClass) {
-        return OrderPriceDTO.class.equals(dtoObjClass);
+    public boolean canHandle(String dtoObjClassName) {
+        System.out.println("dtoObjClass Param1.1==>"+dtoObjClassName);
+        System.out.println("dtoObjClass Param1.2==>"+OrderPriceDTO.class.getName());
+//        System.out.println("dtoObjClass Original1==>"+ OrderPriceDTO.class.getAnnotations());
+        boolean sth=  dtoObjClassName.equals(OrderPriceDTO.class.getName());
+        System.out.println(sth);
+        return sth;
     }
 
     @Override

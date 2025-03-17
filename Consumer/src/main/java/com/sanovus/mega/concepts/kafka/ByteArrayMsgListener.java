@@ -22,9 +22,10 @@ public class ByteArrayMsgListener {
         Object object = SerializationUtils.deserialize(data);
 
         System.out.println("BEGIN");
-        System.out.println(object.getClass());
-        IMessageHandler messageHandler=  messageFactory.getMessageHandler(object);
-        messageHandler.handle(object);
+        System.out.println("byte[] class:"+object.getClass().getName());
+        IMessageHandler messageHandler=  messageFactory.getMessageHandler(object.getClass().getName());
+        System.out.println("final msgHandler:"+messageHandler);
+        //messageHandler.handle(object);
         System.out.println("END");
 
     }

@@ -2,25 +2,21 @@ package com.sanovus.mega.concepts.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
-public class MessageFactory<T> {
+@Service
+public class MessageFactory {
 
     @Autowired
-    private final List<IMessageHandler> messageHandlerList;
+    private List<IMessageHandler> messageHandlerList;
 
-    public MessageFactory(List<IMessageHandler> messageHandlerList) {
-        this.messageHandlerList = messageHandlerList;
-        System.out.println("All list please: \n" + messageHandlerList);
-    }
-
-    public IMessageHandler getMessageHandler(Object dtoObj) {
+    public IMessageHandler getMessageHandler(String dtoObjClassName) {
         Optional<IMessageHandler> messageHandler =
                 messageHandlerList.stream().filter(handler ->
-                        handler.canHandle(dtoObj.getClass())).findFirst();
+                        handler.canHandle(dtoObjClassName)).findFirst();
         return messageHandler.orElse(null);
     }
 
