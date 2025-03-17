@@ -4,7 +4,6 @@ package com.sanovus.mega.concepts.dto;
 import lombok.*;
 
 import java.io.Serial;
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -12,12 +11,12 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderPriceDTO implements Serializable {
+public class OrderPriceDTO implements IBaseDTO {
 
     @Serial
     private static final long serialVersionUID = 5529055596423708524L;
 
-    private long id;
+    private int id;
 
     private String buyer;
 

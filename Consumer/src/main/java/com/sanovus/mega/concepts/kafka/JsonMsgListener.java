@@ -1,8 +1,8 @@
 package com.sanovus.mega.concepts.kafka;
 
 
-import com.sanovus.mega.concepts.dto.OrderPrice;
-import com.sanovus.mega.concepts.dto.TradePrice;
+import com.sanovus.mega.concepts.dto.OrderPriceDTO;
+import com.sanovus.mega.concepts.dto.TradePriceDTO;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -13,15 +13,15 @@ import org.springframework.stereotype.Component;
 public class JsonMsgListener {
 
     @KafkaHandler()
-    public void tradePrice(TradePrice tradePrice ) {
-        System.out.println(tradePrice);
-        System.out.println("tradePrice");
+    public void tradePrice(TradePriceDTO tradePriceDTO ) {
+        System.out.println(tradePriceDTO);
+        System.out.println("tradePriceDTO");
     }
 
     @KafkaHandler()
-    public void orderPrice(OrderPrice orderPrice ) {
-        System.out.println(orderPrice);
-        System.out.println("orderPrice");
+    public void orderPrice(OrderPriceDTO orderPriceDTO ) {
+        System.out.println(orderPriceDTO);
+        System.out.println("orderPriceDTO");
     }
 
 
